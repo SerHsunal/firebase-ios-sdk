@@ -135,7 +135,7 @@ class APITests: XCTestCase {
       }
       XCTAssertEqual(status, RemoteConfigFetchStatus.success)
       self.config.activate { changed, error in
-        XCTAssertFalse(changed)
+        XCTAssertTrue(changed)
         if let error = error {
           print("Activate Error \(error)")
         }
@@ -214,7 +214,7 @@ class APITests: XCTestCase {
     waitForExpectations()
 
     // Simulate updating console.
-    FakeFetch.config = ["Key1": "Value2"]
+    FakeConsole.config = ["Key1": "Value2"]
 
     let expectation2 = self.expectation(description: #function + "2")
     config.fetch { status, error in
